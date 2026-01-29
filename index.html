@@ -397,16 +397,35 @@ onValue(ref(db, "settings/khatmaNumber"), (snapshot) => {
     }
 
     // Neue Khatma starten
-newKhatmaBtn.addEventListener('click', () => {
+
+newKhatmaBtn.addEventListener('click', async () => {
   const current = parseInt(khatmaInput.value || '1', 10);
   const next = current + 1;
-    juzData = {};
-      buildTable();
-      listenJuz(); // neuen Listener für neue Khatma setzen
 
+  // Neue Khatma-Nummer setzen
   khatmaInput.value = next;
   saveKhatmaNumber(next);
+
+  // Alle 30 Juz zurücksetzen
+  const resetData = {};
+  for (let i = 1; i <= 30; i++) {
+    resetData[i] = {
+      name: "",
+      done: false,
+      updatedAt: ""
+    };
+  }
+
+  // In Firebase speichern
+  await set(ref(db, `khatma/${next}/juz`), resetData);
+
+  // Lokale Daten zurücksetzen
+  juzData = {};
+  buildTable();
+  listenJuz();
 });
+
+
 
     //newKhatmaBtn.addEventListener('click', () => {
      // const current = parseInt(khatmaInput.value || '1', 10);
