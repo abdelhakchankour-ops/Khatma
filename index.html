@@ -439,6 +439,10 @@ khatmaInput.addEventListener('change', () => {
       const rRef = ref(db, `${readersPath()}/${encodeURIComponent(name)}`);
       await set(rRef, name);
       newReaderInput.value = "";
+juzData = {};
+      buildTable();
+      listenJuz();
+
     });
 
     // Initial
