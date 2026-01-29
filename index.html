@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>الختمة القرآنية الجماعية</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      text-align: right;
+    }
+    header {
+      background: #0b8457;
+      color: #fff;
+      padding: 1.5rem;
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.6rem;
+    }
+    header p {
+      margin: 0.2rem 0;
+    }
+    main {
+      max-width: 900px;
+      margin: 1.5rem auto 3rem;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .khatma-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .khatma-info label {
+      font-weight: 600;
+    }
+    .khatma-info input[type="number"] {
+      width: 80px;
+      padding: 0.3rem 0.4rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    .khatma-info button {
+      padding: 0.4rem 0.9rem;
+      border-radius: 5px;
+      border: none;
+      background: #0b8457;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .khatma-info button:hover {
+      background: #086845;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #e0e0e0;
+      padding: 0.5rem;
+      font-size: 0.95rem;
+    }
+    th {
+      background: #f0f0f0;
+    }
+    tr.done {
+      background: #e6f7ec;
+    }
+    select {
+      width: 100%;
+      padding: 0.3rem 0.4rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    .small {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    .footer-note {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    .progress {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0b8457;
+    }
+    .add-reader {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .add-reader input {
+      padding: 0.3rem 0.4rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>الختمة القرآنية الجماعية</h1>
+    <p>السلام عليكم ورحمة الله وبركاته</p>
+    <p>أيها الأحبة الأكارم نفتتح هذه الختمة القرآنية المباركة.</p>
+    <p>اللهم اجعل القرآن ربيع قلوبنا ونور صدورنا،</p>
+    <p>اللهم اغفر لنا ولوالدينا ولجميع المسلمين، الأحياء منهم والأموات، برحمتك يا أرحم الراحمين.</p>
+    <p>وصلِّ اللهم وسلم وبارك على نبينا محمد، وعلى آله وصحبه أجمعين.</p>
+  </header>
+
+  <main>
+    <div class="khatma-info">
+      <label for="khatmaNumber">رقم الختمة الحالية:</label>
+      <input type="number" id="khatmaNumber" min="1" value="37" />
+      <button id="newKhatmaBtn">بدء ختمة جديدة</button>
+      <span class="small">يتم حفظ التوزيع عبر الإنترنت في Firebase لجميع القرّاء.</span>
+    </div>
+
+    <div class="progress" id="progressText"></div>
+
+    <table id="juzTable">
+      <thead>
+        <tr>
+          <th>الجزء</th>
+          <th>اسم القارئ</th>
+          <th>تمت القراءة؟</th>
+          <th>آخر تحديث</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="add-reader">
+      <label for="newReader">إضافة قارئ جديد:</label>
+      <input type="text" id="newReader" placeholder="اكتب اسم القارئ" />
+      <button id="addReaderBtn">إضافة</button>
+      <span class="small">سيظهر الاسم فورًا في جميع القوائم ولدى الجميع.</span>
+    </div>
+
+    <div class="footer-note">
+      <p>طريقة الاستخدام:</p>
+      <ul>
+        <li>اختر اسمك من القائمة أمام الجزء الذي تريد قراءته.</li>
+        <li>يمكن للقارئ أن يختار أكثر من جزء، لكن كل جزء لا يقرأه إلا شخص واحد.</li>
+        <li>بعد الانتهاء من القراءة، ضع علامة في خانة "تمت القراءة؟".</li>
+        <li>كل شيء يتم حفظه ومشاركته تلقائيًا عبر الإنترنت.</li>
+        <li>لبدء ختمة جديدة، اضغط على زر "بدء ختمة جديدة".</li>
+      </ul>
+    </div>
+  </main>
+
+  <script type="module">
+    // Firebase v9+ über CDN
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import {
+      getDatabase,
+      ref,
+      onValue,
+      set,
+      update
+    } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-database.js";
+
+    // Deine Firebase-Konfiguration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA97f9-izbDSRVMigBWWffVm9cTWe1rE6M",
+      authDomain: "khatmaquran-53ce5.firebaseapp.com",
+      projectId: "khatmaquran-53ce5",
+      storageBucket: "khatmaquran-53ce5.firebasestorage.app",
+      messagingSenderId: "1024095713766",
+      appId: "1:1024095713766:web:8fbe7e7baf96d9c0913e27",
+      measurementId: "G-67DXQD8BLT",
+      databaseURL: "https://khatmaquran-53ce5-default-rtdb.europe-west1.firebasedatabase.app/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const juzTableBody = document.querySelector('#juzTable tbody');
+    const khatmaInput = document.getElementById('khatmaNumber');
+    const newKhatmaBtn = document.getElementById('newKhatmaBtn');
+    const progressText = document.getElementById('progressText');
+    const newReaderInput = document.getElementById('newReader');
+    const addReaderBtn = document.getElementById('addReaderBtn');
+
+    let readers = [];          // Liste aller Leser
+    let juzData = {};          // Daten der Juz für aktuelle Khatma
+    let selectElements = [];   // Referenzen auf alle Selects
+    let checkboxElements = []; // Referenzen auf alle Checkboxen
+
+    function khatmaPath() {
+      return `khatma/${khatmaInput.value}`;
+    }
+
+    function juzPath(juzNumber) {
+      return `${khatmaPath()}/juz/${juzNumber}`;
+    }
+
+    function readersPath() {
+      return `readers`;
+    }
+
+    // Leser aus Firebase laden und live aktualisieren
+    function listenReaders() {
+      const rRef = ref(db, readersPath());
+      onValue(rRef, (snapshot) => {
+        const val = snapshot.val() || {};
+        readers = Object.values(val).filter(n => typeof n === 'string' && n.trim() !== '');
+        rebuildAllSelects();
+      });
+    }
+
+    // Juz-Daten für aktuelle Khatma live hören
+    function listenJuz() {
+      const jRef = ref(db, `${khatmaPath()}/juz`);
+      onValue(jRef, (snapshot) => {
+        juzData = snapshot.val() || {};
+        applyJuzDataToTable();
+        updateProgress();
+      });
+    }
+
+    // Tabelle einmal aufbauen (30 Zeilen)
+    function buildTable() {
+      juzTableBody.innerHTML = '';
+      selectElements = [];
+      checkboxElements = [];
+
+      for (let i = 1; i <= 30; i++) {
+        const tr = document.createElement('tr');
+
+        const tdJuz = document.createElement('td');
+        tdJuz.textContent = 'الجزء ' + i;
+
+        const tdName = document.createElement('td');
+        const nameSelect = document.createElement('select');
+        selectElements[i] = nameSelect;
+
+        const tdDone = document.createElement('td');
+        const doneCheckbox = document.createElement('input');
+        doneCheckbox.type = 'checkbox';
+        checkboxElements[i] = doneCheckbox;
+
+        const tdUpdated = document.createElement('td');
+        tdUpdated.className = 'small';
+
+        // Events
+        nameSelect.addEventListener('change', () => {
+          const selectedName = nameSelect.value;
+          // Wenn leer gewählt → Juz freigeben
+          if (!selectedName) {
+            updateJuz(i, { name: "", done: false });
+            doneCheckbox.checked = false;
+            return;
+          }
+          // Juz gehört nur einem Leser: kein weiterer Check nötig,
+          // weil jede Zeile nur einen Select hat.
+          updateJuz(i, { name: selectedName });
+        });
+
+        doneCheckbox.addEventListener('change', () => {
+          updateJuz(i, { done: doneCheckbox.checked });
+        });
+
+        tdName.appendChild(nameSelect);
+        tdDone.appendChild(doneCheckbox);
+
+        tr.appendChild(tdJuz);
+        tr.appendChild(tdName);
+        tr.appendChild(tdDone);
+        tr.appendChild(tdUpdated);
+
+        juzTableBody.appendChild(tr);
+      }
+
+      rebuildAllSelects();
+      applyJuzDataToTable();
+    }
+
+    // Alle Selects mit aktueller Leser-Liste neu aufbauen
+    function rebuildAllSelects() {
+      for (let i = 1; i <= 30; i++) {
+        const select = selectElements[i];
+        if (!select) continue;
+
+        const currentValue = juzData[i]?.name || "";
+
+        select.innerHTML = "";
+
+        const emptyOption = document.createElement('option');
+        emptyOption.value = "";
+        emptyOption.textContent = "اختر اسم القارئ";
+        select.appendChild(emptyOption);
+
+        readers.forEach(n => {
+          const opt = document.createElement('option');
+          opt.value = n;
+          opt.textContent = n;
+          select.appendChild(opt);
+        });
+
+        if (currentValue) {
+          select.value = currentValue;
+        }
+      }
+    }
+
+    // Juz-Daten aus Firebase in die Tabelle schreiben
+    function applyJuzDataToTable() {
+      for (let i = 1; i <= 30; i++) {
+        const row = juzTableBody.children[i - 1];
+        if (!row) continue;
+
+        const data = juzData[i] || {};
+        const name = data.name || "";
+        const done = !!data.done;
+        const updatedAt = data.updatedAt || "";
+
+        const select = selectElements[i];
+        const checkbox = checkboxElements[i];
+        const updatedCell = row.querySelector('td:last-child');
+
+        if (select) {
+          if (name && readers.includes(name)) {
+            select.value = name;
+          } else if (name && !readers.includes(name)) {
+            // Leser existiert nicht mehr in Liste → trotzdem anzeigen
+            const opt = document.createElement('option');
+            opt.value = name;
+            opt.textContent = name;
+            select.appendChild(opt);
+            select.value = name;
+          } else {
+            select.value = "";
+          }
+        }
+
+        if (checkbox) {
+          checkbox.checked = done;
+        }
+
+        row.classList.toggle('done', done);
+        if (updatedCell) {
+          updatedCell.textContent = updatedAt;
+        }
+      }
+    }
+
+    // Juz in Firebase aktualisieren
+    function updateJuz(juzNumber, changes) {
+      const current = juzData[juzNumber] || { name: "", done: false, updatedAt: "" };
+      const updated = {
+        ...current,
+        ...changes,
+        updatedAt: new Date().toLocaleString('de-DE')
+      };
+      const jRef = ref(db, juzPath(juzNumber));
+      set(jRef, updated);
+    }
+
+    // Fortschritt berechnen
+    function updateProgress() {
+      let doneCount = 0;
+      for (let i = 1; i <= 30; i++) {
+        if (juzData[i]?.done) doneCount++;
+      }
+      const percent = Math.round((doneCount / 30) * 100);
+      progressText.textContent =
+        `تم إكمال ${doneCount} من 30 جزءًا (${percent}٪) في الختمة رقم ${khatmaInput.value}.`;
+    }
+
+    // Neue Khatma starten
+    newKhatmaBtn.addEventListener('click', () => {
+      const current = parseInt(khatmaInput.value || '1', 10);
+      khatmaInput.value = current + 1;
+      juzData = {};
+      buildTable();
+      listenJuz(); // neuen Listener für neue Khatma setzen
+    });
+
+    // Khatma-Wechsel per Eingabe
+    khatmaInput.addEventListener('change', () => {
+      juzData = {};
+      buildTable();
+      listenJuz();
+    });
+
+    // Neuen Leser hinzufügen
+    addReaderBtn.addEventListener('click', async () => {
+      const name = (newReaderInput.value || "").trim();
+      if (!name) return;
+      const rRef = ref(db, `${readersPath()}/${encodeURIComponent(name)}`);
+      await set(rRef, name);
+      newReaderInput.value = "";
+    });
+
+    // Initial
+    buildTable();
+    listenReaders();
+    listenJuz();
+  </script>
+</body>
+</html>
