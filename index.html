@@ -189,6 +189,19 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+// Khatma-Nummer speichern
+function saveKhatmaNumber(num) {
+  update(ref(db, "settings"), { khatmaNumber: num });
+}
+
+// Khatma-Nummer live aus Firebase laden
+onValue(ref(db, "settings/khatmaNumber"), (snapshot) => {
+  const num = snapshot.val();
+  if (num) {
+    khatmaInput.value = num;
+  }
+});
+
 
     const juzTableBody = document.querySelector('#juzTable tbody');
     const khatmaInput = document.getElementById('khatmaNumber');
@@ -384,20 +397,40 @@
     }
 
     // Neue Khatma starten
-    newKhatmaBtn.addEventListener('click', () => {
-      const current = parseInt(khatmaInput.value || '1', 10);
-      khatmaInput.value = current + 1;
-      juzData = {};
+newKhatmaBtn.addEventListener('click', () => {
+  const current = parseInt(khatmaInput.value || '1', 10);
+  const next = current + 1;
+    juzData = {};
       buildTable();
       listenJuz(); // neuen Listener für neue Khatma setzen
-    });
+
+  khatmaInput.value = next;
+  saveKhatmaNumber(next);
+});
+
+    //newKhatmaBtn.addEventListener('click', () => {
+     // const current = parseInt(khatmaInput.value || '1', 10);
+      //khatmaInput.value = current + 1;
+      //juzData = {};
+      //buildTable();
+      //listenJuz(); // neuen Listener für neue Khatma setzen
+   // });
 
     // Khatma-Wechsel per Eingabe
-    khatmaInput.addEventListener('change', () => {
-      juzData = {};
+khatmaInput.addEventListener('change', () => {
+  const num = parseInt(khatmaInput.value || '1', 10);
+ juzData = {};
       buildTable();
       listenJuz();
-    });
+
+  saveKhatmaNumber(num);
+});
+
+    //khatmaInput.addEventListener('change', () => {
+     // juzData = {};
+     // buildTable();
+     // listenJuz();
+   // });
 
     // Neuen Leser hinzufügen
     addReaderBtn.addEventListener('click', async () => {
