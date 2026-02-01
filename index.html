@@ -165,6 +165,7 @@
   </main>
 
   <script type="module">
+
     // Firebase v9+ über CDN
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
     import {
@@ -209,6 +210,8 @@ onValue(ref(db, "settings/khatmaNumber"), (snapshot) => {
     const progressText = document.getElementById('progressText');
     const newReaderInput = document.getElementById('newReader');
     const addReaderBtn = document.getElementById('addReaderBtn');
+const saveAllBtn = document.getElementById('saveAllBtn');
+
 
     let readers = [];          // Liste aller Leser
     let juzData = {};          // Daten der Juz für aktuelle Khatma
@@ -248,6 +251,17 @@ onValue(ref(db, "settings/khatmaNumber"), (snapshot) => {
     }
 
     // Tabelle einmal aufbauen (30 Zeilen)
+<button id="saveAllBtn" style="
+  padding: 0.5rem 1rem;
+  background:#0b8457;
+  color:white;
+  border:none;
+  border-radius:5px;
+  font-weight:600;
+  cursor:pointer;
+  margin:10px 0;
+">💾 Alles speichern</button>
+
     function buildTable() {
       juzTableBody.innerHTML = '';
       selectElements = [];
@@ -501,6 +515,30 @@ juzData = {};
     buildTable();
     listenReaders();
     listenJuz();
+
+// ALLES SPEICHERN BUTTON
+saveAllBtn.addEventListener('click', async () => {
+  const khNum = parseInt(khatmaInput.value || '1', 10);
+
+  // 1. Khatma-Nummer speichern
+  await update(ref(db, "settings"), { khatmaNumber: khNum });
+
+  // 2. Alle Juz aus der Tabelle einsammeln
+  const updates = {};
+  for (let i = 1; i <= 30; i++) {
+    updates[i] = {
+      name: selectElements[i]?.value || "",
+      done: checkboxElements[i]?.checked || false,
+      updatedAt: new Date().toLocaleString('de-DE')
+    };
+  }
+
+  // 3. Alles in Firebase speichern
+  await set(ref(db, `khatma/${khNum}/juz`), updates);
+
+  alert("Alle Daten wurden erfolgreich gespeichert.");
+});
+
   </script>
 </body>
 </html>
