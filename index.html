@@ -116,15 +116,20 @@
   </style>
 </head>
 <body>
-  <script>
-  const correctPassword = "26koranKh"; // Passwort hier eintragen
+<script>
+  const correctPassword = "26koran13579"; // Passwort hier eintragen
 
-  let userPassword = prompt("Bitte Passwort eingeben:");
+  const userPassword = prompt("Bitte Passwort eingeben:");
 
   if (userPassword !== correctPassword) {
-    document.body.innerHTML = "<h2 style='text-align:center;margin-top:50px;'>Falsches Passwort</h2>";
+    document.body.innerHTML =
+      "<h2 style='text-align:center;margin-top:50px;'>Falsches Passwort</h2>";
+
+    // ❗ Stoppt das Laden der restlichen Seite
+    throw new Error("Access denied");
   }
 </script>
+
   <header>
     <h1>الختمة القرآنية الجماعية</h1>
     <p>السلام عليكم ورحمة الله وبركاته</p>
@@ -500,5 +505,6 @@
   </script>
 </body>
 </html>
+
 
 
