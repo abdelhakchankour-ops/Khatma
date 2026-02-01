@@ -416,9 +416,6 @@ listenJuz(); // neuen Listener für neue Khatma setzen
   khatmaInput.value = next;
   saveKhatmaNumber(next);
 
-listenJuz(); // neuen Listener für neue Khatma setzen
-    juzData = {};
-      buildTable();
 
 
   // Alle 30 Juz zurücksetzen
@@ -429,6 +426,11 @@ listenJuz(); // neuen Listener für neue Khatma setzen
       done: false,
       updatedAt: ""
     };
+
+// In Firebase speichern
+  await set(ref(db, `khatma/${next}/juz`), resetData);
+ listenJuz();
+
   }
 
   // In Firebase speichern
