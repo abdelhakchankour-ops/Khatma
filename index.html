@@ -165,8 +165,6 @@
   </main>
 
   <script type="module">
-const saveAllBtn = document.getElementById('saveAllBtn');
-
     // Firebase v9+ über CDN
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
     import {
@@ -191,16 +189,6 @@ const saveAllBtn = document.getElementById('saveAllBtn');
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-onValue(ref(db, "settings/khatmaNumber"), (snapshot) => {
-  const num = snapshot.val();
-  if (num) {
-    khatmaInput.value = num;
-    juzData = {};
-    buildTable();
-    listenJuz();
-  }
-});
-
 // Khatma-Nummer speichern
 function saveKhatmaNumber(num) {
   update(ref(db, "settings"), { khatmaNumber: num });
@@ -408,9 +396,6 @@ onValue(ref(db, "settings/khatmaNumber"), (snapshot) => {
         `تم إكمال ${doneCount} من 30 جزءًا (${percent}٪) في الختمة رقم ${khatmaInput.value}.`;
     }
 
-<button id="saveAllBtn">Alle Änderungen speichern</button>
-
-
     // Neue Khatma starten
 
 newKhatmaBtn.addEventListener('click', async () => {
@@ -420,6 +405,21 @@ newKhatmaBtn.addEventListener('click', async () => {
   // Neue Khatma-Nummer setzen
   khatmaInput.value = next;
   saveKhatmaNumber(next);
+khatmaInput.value = next;
+  saveKhatmaNumber(next);
+
+listenJuz(); // neuen Listener für neue Khatma setzen
+    juzData = {};
+      buildTable();
+      
+
+  khatmaInput.value = next;
+  saveKhatmaNumber(next);
+
+listenJuz(); // neuen Listener für neue Khatma setzen
+    juzData = {};
+      buildTable();
+
 
   // Alle 30 Juz zurücksetzen
   const resetData = {};
@@ -430,44 +430,33 @@ newKhatmaBtn.addEventListener('click', async () => {
       updatedAt: ""
     };
   }
-saveAllBtn.addEventListener('click', async () => {
-  const khNum = parseInt(khatmaInput.value || '1', 10);
-
-  // Khatma-Nummer speichern (falls du saveKhatmaNumber schon hast, diese Zeile reicht)
-  if (typeof saveKhatmaNumber === 'function') {
-    saveKhatmaNumber(khNum);
-  } else {
-    await update(ref(db, "settings"), { khatmaNumber: khNum });
-  }
-
-  // Alle 30 Juz aus der aktuellen Tabelle einsammeln und speichern
-  const updates = {};
-  for (let i = 1; i <= 30; i++) {
-    const name = selectElements[i]?.value || "";
-    const done = !!checkboxElements[i]?.checked;
-    updates[i] = {
-      name,
-      done,
-      updatedAt: new Date().toLocaleString('de-DE')
-    };
-  }
-
-  await set(ref(db, `${khatmaPath()}/juz`), updates);
-
-  alert('Alle aktuellen Änderungen wurden gespeichert.');
-});
-
 
   // In Firebase speichern
   await set(ref(db, `khatma/${next}/juz`), resetData);
+ listenJuz();
 
   // Lokale Daten zurücksetzen
   juzData = {};
   buildTable();
-  listenJuz();
+ 
 });
 
 
+
+newKhatmaBtn.addEventListener('click', () => {
+  const current = parseInt(khatmaInput.value || '1', 10);
+  const next = current + 1;
+khatmaInput.value = next;
+  saveKhatmaNumber(next);
+
+listenJuz(); // neuen Listener für neue Khatma setzen
+    juzData = {};
+      buildTable();
+      
+
+  khatmaInput.value = next;
+  saveKhatmaNumber(next);
+});
 
     //newKhatmaBtn.addEventListener('click', () => {
      // const current = parseInt(khatmaInput.value || '1', 10);
