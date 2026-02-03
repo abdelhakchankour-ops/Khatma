@@ -123,6 +123,15 @@
   if (userPassword === correctPassword) {
     // Seite anzeigen
     document.body.style.display = "block";
+ }
+
+    else {
+    // Seite blockieren
+    document.body.innerHTML =
+      "<h2 style='text-align:center;margin-top:50px;'>Falsches Passwort</h2>";
+    document.body.style.display = "block";
+    throw new Error("Access denied");
+  }
  
 
   <header>
@@ -503,14 +512,9 @@
   </script>
 </body>
 </html>
-       } else {
-    // Seite blockieren
-    document.body.innerHTML =
-      "<h2 style='text-align:center;margin-top:50px;'>Falsches Passwort</h2>";
-    document.body.style.display = "block";
-    throw new Error("Access denied");
-  }
+      
 </script>
+
 
 
 
