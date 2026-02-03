@@ -113,10 +113,16 @@
       border-radius: 5px;
       border: 1px solid #ccc;
     }
-//<body style="display:none;">
+ <body style="display:none;">
 
+<script>
+  const correctPassword = "26koran13579"; // Passwort hier eintragen
 
+  const userPassword = prompt("Bitte Passwort eingeben:");
 
+  if (userPassword === correctPassword) {
+    // Seite anzeigen
+    document.body.style.display = "block";
  
 
   <header>
@@ -497,11 +503,14 @@
   </script>
 </body>
 </html>
-      
-
-
-
-
+       } else {
+    // Seite blockieren
+    document.body.innerHTML =
+      "<h2 style='text-align:center;margin-top:50px;'>Falsches Passwort</h2>";
+    document.body.style.display = "block";
+    throw new Error("Access denied");
+  }
+</script>
 
 
 
