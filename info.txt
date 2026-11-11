@@ -1,1 +1,116 @@
--
+zahl1 = 5
+zahl2 = 2.0
+zahl3 = 1+1j
+param = 'Aufgabe1'
+
+zahl4= zahl1+zahl2
+param1= param+ '-Python Basics'
+
+print('uebung2.b','zahl1',zahl1,'hat den Datentype',type(zahl1))
+print('uebung2.b','zahl2',zahl2,'hat den Datentype',type(zahl2))
+print('uebung2.b','zahl3',zahl3,'hat den Datentype',type(zahl3))
+print('uebung2.b','string1',param,'hat den Datentype',type(param))
+print('uebung2.C','zahl4',zahl4,'hat den Datentype',type(zahl4))
+print('uebung2.d','string2',param1,'hat den Datentype',type(param1))
+
+
+
+
+
+print('Loesung 2.4 Ü01')
+list1=['Mohammed','omar','Ali','Ibrahim','Abderrahim']
+list2=['Baschir','Ahmed']
+list1.append(list2)
+param= (200,300,-100)
+list3= [str(param[0]),str(param[1]),str(param[2])]
+
+Hauptstadt = {'Marokko': 'Rabat', 'Deutschland':'Berlin' , 'Frankreisch':'Paris' }
+
+
+menge1 = { 'Trauben','Datteln','Bananne'}
+print(list3)
+list3.append(500)
+print(list3)
+print('menge1_1: ', menge1)
+menge1.add('Birne')
+
+
+
+
+print(list1)
+list1.remove('Mohammed')
+
+print(list1)
+print(param[0])
+print(param[1])
+print('menge1: ', menge1)
+print(Hauptstadt['Marokko'])
+print(Hauptstadt['Deutschland'])
+print(Hauptstadt['Frankreisch'])
+
+#Übung 2.5.Ü.01
+#Aufgabe: Datentypen
+#Erstelle ein Python-Skript, das folgende Aufgaben ausführt:
+
+#a) Definiere Variablen für jeden der folgenden Datentypen:
+#   int, float, complex, str, tuple, list und set. Verwende
+# für die Definition dieser Variablen Werte deiner Wahl,
+# aber achte darauf, dass die Werte repräsentativ für den
+# jeweiligen Datentyp sind.
+#b) Für jede der definierten Variablen, verwende die Funktion type()
+#und drucke den
+#Datentyp der Variable in der Konsole aus.
+#c) Konvertiere die int Variable in einen float und einen str Datentyp
+#und drucke das Ergebnis aus.
+
+#d) Erstelle eine neue Liste, die aus den ersten zwei Elementen der
+#ursprünglichen Liste und dem letzten Element der Tupel-Variable besteht.
+#Prüfe, ob das letzte Element des Tupels bereits in der neuen
+#Liste vorhanden ist, bevor du es hinzufügst. Drucke die neue Liste aus.
+
+# Verwende die set Variable, um ein Element hinzuzufügen,
+# das bereits existiert, und ein neues Element, das noch nicht in der Menge
+ #vorhanden ist. Drucke die veränderte Menge aus.  
+
+var_int = 10
+var_float = 20.0
+var_complex = 2+1j
+var_str = 'Zeichenkette'
+var_tuple = ('Schule', 'Schüller' ,2026)
+var_list = ['Haus','Fläsche','Ort']
+#var_set = set('Regal', 'Schrank','Tisch')
+var_set = {'Regal', 'Schrank','Tisch'}
+
+
+print('var_int:', var_int,type(var_int),'var_float:' ,var_float,type(var_float),'var_complex:',var_complex,type(var_complex))
+print('var_str:', var_str ,type(var_str),'var_tuple:' ,var_tuple,type(var_tuple),'var_list:',var_list,type(var_list))
+print('var_set:',var_set,type(var_set))
+
+var_int_float = float(var_int)
+var_int_str = str(var_int)
+print('var_int_float:',var_int_float, type (var_int_float))
+print('var_int_str: ',var_int_str,type(var_int_str))
+
+var_list1= [var_list[0],var_list[1],var_tuple[2]]
+
+print('var_list1: ',var_list1)
+var_set.add('Tisch')
+var_set.add('Regal')
+var_set.add('Kautsch')
+
+print('var_set:',var_set,type(var_set))
+
+if var_tuple[0] not in var_set:
+    var_set.add(var_tuple[0])
+    print('var_set:',var_set,type(var_set))
+
+
+#Übung 2.5.Ü.02
+#Aufgabe: Datentypen
+
+#a) Definiere Variablen für jeden der folgenden Datentypen:
+#int, float, complex, str, tuple, list, und set. Weise jeder
+#Variablen einen repräsentativen Wert zu.
+#Zum Beispiel könnte die Variable für den Datentyp int den Wert 42 haben.
+
+
